@@ -6,12 +6,15 @@ One of the best way to learn data structures and algorithms is to implement them
 The idea of our project is to offer this opportunity and dive into this complex, yet extremely interesting sphere!
 
 # Cloning a repository
-Make sure you have installed [Git](https://git-scm.com/downloads).
+**Make sure you have [Git](https://git-scm.com/downloads) installed.**
 
 Now it is time to clone this repository. There are several variants to do it. Chose one (of two) that is the most suitable for you:
-1. Use [Github Desktop](https://desktop.github.com/). The most simple way, but not very powerful.
-1. Usual repository clone:
-    1. Open (or download and install) [Git](https://git-scm.com/downloads) Bash
+- Use [Github Desktop](https://desktop.github.com/). The most simple way, but not very powerful.
+
+- Or you can perform usual repository clone
+
+    1. Open (or download and install) [Git](https://git-scm.com/downloads) Bash.
+
     1. Change your current working directory to the location where the repository will be cloned:
         ```console
         cd "path_to_clone_this_repository"
