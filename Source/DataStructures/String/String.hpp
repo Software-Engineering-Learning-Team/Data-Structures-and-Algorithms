@@ -34,11 +34,14 @@ struct String {
   [[nodiscard]] StringIterator begin() const;
   [[nodiscard]] StringIterator end() const;
 
+  friend bool operator==(const String &first, const String &second) noexcept;
+  friend bool operator!=(const String &first, const String &second) noexcept;
+
  private:
   std::size_t string_length{};
   std::size_t capacity{};
   char *string{};
-  static void swap(String &lhs, String &rhs) noexcept;
+  static void swap(String &first, String &second) noexcept;
 };
 
 }

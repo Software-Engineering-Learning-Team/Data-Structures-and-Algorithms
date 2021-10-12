@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include "String.hpp"
-#include "../../Algorithms/Copying.tpp"
+#include "../../Algorithms/Copying/Copying.tpp"
 
 namespace DataStructures {
 
@@ -29,7 +29,9 @@ String::~String() {
 }
 
 std::ostream &operator<<(std::ostream &stream, const String &basicString) {
-  stream << basicString.string;
+  if (basicString.string != nullptr) {
+    stream << basicString.string;
+  }
   return stream;
 }
 
@@ -43,10 +45,10 @@ String &String::operator=(String other) {
   return *this;
 }
 
-void String::swap(String &lhs, String &rhs) noexcept {
-  std::swap(lhs.string, rhs.string);
-  std::swap(lhs.string_length, rhs.string_length);
-  std::swap(lhs.capacity, rhs.capacity);
+void String::swap(String &first, String &second) noexcept {
+  std::swap(first.string, second.string);
+  std::swap(first.string_length, second.string_length);
+  std::swap(first.capacity, second.capacity);
 }
 
 const char *String::get_c_str() const {
@@ -107,6 +109,20 @@ String String::get_reversed() {
   String result(*this);
   result.reverse();
   return result;
+}
+bool operator==(const String &first, const String &second) noexcept {
+  if (first.string_length == second.string_length && first.string_length > 0) {
+    for (std::size_t i = 0; i < first.string_length; i++) {
+      if (first.string[i] != second.string[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+bool operator!=(const String &first, const String &second) noexcept {
+  return !(first == second);
 }
 
 }

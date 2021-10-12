@@ -16,6 +16,12 @@ int main() {
     std::cout << c << " ";
   }
   std::cout << "\n";
+
+  if ((string1.get_reversed() == DataStructures::String("!dlrow olleH"))) {
+    std::cout << "Equal!\n";
+  } else {
+    std::cout << "Not equal!\n";
+  }
   string1.clear();
   string1.reset();
   std::cout << string1 << " : " << string1.get_capacity() << " : " << string1.get_length() << "\n";
