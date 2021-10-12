@@ -3,7 +3,8 @@
 
 #include <cstddef>
 #include <ostream>
-
+#include "StringIterator.hpp"
+namespace DataStructures {
 struct String {
   String();
   explicit String(const char *string);
@@ -26,11 +27,16 @@ struct String {
   [[nodiscard]] size_t get_capacity() const;
   [[nodiscard]] size_t get_length() const;
 
+  [[nodiscard]] StringIterator begin() const;
+  [[nodiscard]] StringIterator end() const;
+
  private:
   std::size_t string_length{};
   std::size_t capacity{};
   char *string{};
   static void swap(String &lhs, String &rhs) noexcept;
 };
+
+}
 
 #endif //SOURCE_BASICSTRING_HPP

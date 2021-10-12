@@ -3,6 +3,8 @@
 #include <iostream>
 #include "String.hpp"
 
+namespace DataStructures {
+
 String::String(const char *string) {
   if (string != nullptr) {
     std::size_t length = std::strlen(string);
@@ -85,3 +87,8 @@ void String::clear() {
     this->string[i] = 0;
   }
 }
+StringIterator String::begin() const { return StringIterator(string); }
+StringIterator String::end() const { return StringIterator(string + string_length); }
+
+}
+
