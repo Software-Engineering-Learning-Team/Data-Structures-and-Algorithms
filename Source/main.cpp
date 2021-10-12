@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "DataStructures/String/String.hpp"
 
 int main() {
@@ -32,10 +33,23 @@ int main() {
   std::cout << helloHello << " : " << helloHello.get_capacity() << " : " << helloHello.get_length() << "\n";
   helloHello.shrink_to_fit();
   std::cout << helloHello << " : " << helloHello.get_capacity() << " : " << helloHello.get_length() << "\n";
-  DataStructures::String hi("Hi\n");
+  DataStructures::String hi("Hi");
   hi += ", ";
   hi += "World!";
   hi.shrink_to_fit();
   std::cout << hi << " : " << hi.get_capacity() << " : " << hi.get_length() << "\n";
+  hi[1] = 'I';
+  std::cout << hi << " : " << hi.get_capacity() << " : " << hi.get_length() << "\n";
+  std::cout << hi[hi.get_length() - 1] << " : " << hi.get_capacity() << " : " << hi.get_length() << "\n";
+
+  DataStructures::String str(nullptr);
+  std::cout << str.get_first() << str.get_last() << "\n";
+  str += "NEW";
+  std::cout << str.get_first() << str.get_last() << "\n";
+  str.at(1) = 'T';
+  std::cout << str << "\n";
+  str += " STRING FOR SLICING";
+  std::cout << str << "\n";
+  std::cout << "|" << str.get_slice(4, 9) << "|" << "\n";
   return 0;
 }

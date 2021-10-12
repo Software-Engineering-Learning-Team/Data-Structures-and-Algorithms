@@ -11,11 +11,10 @@ struct Copying {
   }
 
   template<typename T>
-  static T *copy_data_into_array(T *destination, std::size_t n, const T *source) {
+  static void copy_data_into_array(T *destination, std::size_t n, const T *source) {
     for (std::size_t i = 0; i < n; i++) {
       destination[i] = source[i];
     }
-    return &destination[n - 1];
   }
 };
 

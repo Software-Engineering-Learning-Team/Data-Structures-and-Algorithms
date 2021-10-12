@@ -7,6 +7,7 @@
 namespace DataStructures {
 
 String::String(const char *string) {
+  this->string = new char[1]();
   if (string != nullptr) {
     std::size_t length = std::strlen(string);
     reserve(2 * length + 1);
@@ -25,7 +26,7 @@ String::String(String &&basicString) noexcept: String(nullptr) {
 }
 
 String::~String() {
-  reset();
+  delete[] string;
 }
 
 std::ostream &operator<<(std::ostream &stream, const String &basicString) {
@@ -78,7 +79,7 @@ void String::reset() {
   delete[] string;
   capacity = 0;
   string_length = 0;
-  string = nullptr;
+  string = new char[1]();
 }
 void String::clear() {
   Algorithms::Copying::fill_array(string, capacity, '\0');
@@ -123,9 +124,8 @@ String operator+(const String &first, const String &second) {
   String result;
   std::size_t sum_length = first.string_length + second.string_length;
   result.reserve(2 * sum_length + 1);
-  char *first_string_end_ptr =
-      Algorithms::Copying::copy_data_into_array(result.string, first.string_length, first.string);
-  Algorithms::Copying::copy_data_into_array(first_string_end_ptr, second.string_length, second.string);
+  Algorithms::Copying::copy_data_into_array(result.string, first.string_length, first.string);
+  Algorithms::Copying::copy_data_into_array(result.string + first.string_length, second.string_length, second.string);
   result.string_length = sum_length;
   return result;
 }
@@ -133,13 +133,44 @@ String &String::operator+=(const String &other) {
   *this = *this + other;
   return *this;
 }
-String operator+(const String &first, const char *string) {
+String operator+(const String &first, const char *c_string) {
   const String &result(first);
-  return result + String(string);
+  return result + String(c_string);
 }
-String &String::operator+=(const char *string) {
-  *this = *this + string;
+String &String::operator+=(const char *c_string) {
+  *this = *this + c_string;
   return *this;
+}
+char &String::operator[](std::size_t index) {
+  return string[index];
+}
+char String::operator[](std::size_t index) const {
+  return string[index];
+}
+char String::get_first() const {
+
+  return string[0];
+}
+char String::get_last() const {
+  return string[string_length != 0 ? string_length - 1 : 0];
+}
+char &String::at(std::size_t index) {
+  if (index >= string_length) {
+    throw std::out_of_range("String index is out of range!");
+  }
+  return string[index];
+}
+char String::at(std::size_t index) const {
+  if (index >= string_length) {
+    throw std::out_of_range("String index is out of range!");
+  }
+  return string[index];
+}
+String String::get_slice(std::size_t first_index, std::size_t last_index) const {
+  String result;
+  result.reserve(last_index - first_index + 2);
+  Algorithms::Copying::copy_data_into_array(result.string, last_index - first_index + 1, string + first_index);
+  return result;
 }
 
 }
