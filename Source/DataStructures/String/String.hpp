@@ -5,6 +5,7 @@
 #include <ostream>
 #include "StringIterator.hpp"
 namespace DataStructures {
+
 struct String {
   String();
   explicit String(const char *string);
