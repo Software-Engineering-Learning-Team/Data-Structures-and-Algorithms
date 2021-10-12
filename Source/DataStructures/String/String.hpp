@@ -23,6 +23,9 @@ struct String {
   void reset();
   void clear();
 
+  void reverse();
+  String get_reversed();
+
   [[nodiscard]] const char *get_c_str() const;
   [[nodiscard]] size_t get_capacity() const;
   [[nodiscard]] size_t get_length() const;

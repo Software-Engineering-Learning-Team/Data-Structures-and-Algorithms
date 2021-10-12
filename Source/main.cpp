@@ -10,6 +10,9 @@ int main() {
   std::cout << string << " : " << string.get_capacity() << " : " << string.get_length() << "\n";
   DataStructures::String string1{std::move(string)};
   std::cout << string1 << " : " << string1.get_capacity() << " : " << string1.get_length() << "\n";
+  std::cout << string1.get_reversed() << " : " << string1.get_capacity() << " : " << string1.get_length() << "\n";
+  std::cout << string1 << " : " << string1.get_capacity() << " : " << string1.get_length() << "\n";
+  std::cout << DataStructures::String("").get_length() << "\n";
   std::cout << DataStructures::String("").get_length() << "\n";
 
   for (const auto &c: string1) {

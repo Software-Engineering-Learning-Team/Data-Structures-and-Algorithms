@@ -89,6 +89,19 @@ void String::clear() {
 }
 StringIterator String::begin() const { return StringIterator(string); }
 StringIterator String::end() const { return StringIterator(string + string_length); }
+void String::reverse() {
+  char *temp = new char[string_length + 1]();
+  for (std::size_t i = 0; i < string_length; i++) {
+    temp[i] = string[string_length - 1 - i];
+  }
+  delete[] string;
+  string = temp;
+}
+String String::get_reversed() {
+  String result(*this);
+  result.reverse();
+  return result;
+}
 
 }
 
