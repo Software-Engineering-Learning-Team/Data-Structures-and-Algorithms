@@ -13,8 +13,7 @@ struct String {
   String(String &&basicString) noexcept;
   ~String();
 
-  String &operator=(String other);
-  String &operator=(String &&other) noexcept;
+  String &operator=(String other) noexcept;
 
   friend std::ostream &operator<<(std::ostream &stream, const String &basicString);
 
@@ -36,6 +35,12 @@ struct String {
 
   friend bool operator==(const String &first, const String &second) noexcept;
   friend bool operator!=(const String &first, const String &second) noexcept;
+
+  friend String operator+(const String &first, const String &second);
+  friend String operator+(const String &first, const char *string);
+
+  String &operator+=(const String &other);
+  String &operator+=(const char *string);
 
  private:
   std::size_t string_length{};

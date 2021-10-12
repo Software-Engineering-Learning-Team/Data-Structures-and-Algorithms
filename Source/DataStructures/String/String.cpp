@@ -35,12 +35,7 @@ std::ostream &operator<<(std::ostream &stream, const String &basicString) {
   return stream;
 }
 
-String &String::operator=(String &&other) noexcept {
-  swap(*this, other);
-  return *this;
-}
-
-String &String::operator=(String other) {
+String &String::operator=(String other) noexcept {
   swap(*this, other);
   return *this;
 }
@@ -123,6 +118,28 @@ bool operator==(const String &first, const String &second) noexcept {
 }
 bool operator!=(const String &first, const String &second) noexcept {
   return !(first == second);
+}
+String operator+(const String &first, const String &second) {
+  String result;
+  std::size_t sum_length = first.string_length + second.string_length;
+  result.reserve(2 * sum_length + 1);
+  char *first_string_end_ptr =
+      Algorithms::Copying::copy_data_into_array(result.string, first.string_length, first.string);
+  Algorithms::Copying::copy_data_into_array(first_string_end_ptr, second.string_length, second.string);
+  result.string_length = sum_length;
+  return result;
+}
+String &String::operator+=(const String &other) {
+  *this = *this + other;
+  return *this;
+}
+String operator+(const String &first, const char *string) {
+  const String &result(first);
+  return result + String(string);
+}
+String &String::operator+=(const char *string) {
+  *this = *this + string;
+  return *this;
 }
 
 }

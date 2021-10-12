@@ -25,5 +25,17 @@ int main() {
   string1.clear();
   string1.reset();
   std::cout << string1 << " : " << string1.get_capacity() << " : " << string1.get_length() << "\n";
+
+  DataStructures::String hello("Hello ");
+  std::cout << hello << " : " << hello.get_capacity() << " : " << hello.get_length() << "\n";
+  DataStructures::String helloHello = hello + DataStructures::String(", ") + DataStructures::String("World!");
+  std::cout << helloHello << " : " << helloHello.get_capacity() << " : " << helloHello.get_length() << "\n";
+  helloHello.shrink_to_fit();
+  std::cout << helloHello << " : " << helloHello.get_capacity() << " : " << helloHello.get_length() << "\n";
+  DataStructures::String hi("Hi\n");
+  hi += ", ";
+  hi += "World!";
+  hi.shrink_to_fit();
+  std::cout << hi << " : " << hi.get_capacity() << " : " << hi.get_length() << "\n";
   return 0;
 }
