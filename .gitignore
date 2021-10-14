@@ -33,3 +33,6 @@
 
 /Source/cmake*
 /Source/.idea
+/Source/.vs
+/Source/out
+/Source/Test/out
