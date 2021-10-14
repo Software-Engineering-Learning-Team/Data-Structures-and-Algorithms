@@ -42,15 +42,15 @@ struct String {
   String &operator+=(const String &other);
   String &operator+=(const char *string);
 
-  char operator[](std::size_t index) const;
-  char &operator[](std::size_t index);
+  [[nodiscard]] char operator[](std::size_t index) const;
+  [[nodiscard]] char &operator[](std::size_t index);
 
   [[nodiscard]] char get_first() const;
   [[nodiscard]] char get_last() const;
 
-  String get_slice(std::size_t first_index, std::size_t last_index) const;
+  [[nodiscard]] String get_slice(std::size_t first_index, std::size_t last_index) const;
 
-  char &at(std::size_t index);
+  [[nodiscard]] char &at(std::size_t index);
   [[nodiscard]] char at(std::size_t index) const;
 
  private:
