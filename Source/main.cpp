@@ -3,6 +3,7 @@
 #include "DataStructures/String/String.hpp"
 
 int main() {
-  
-  return 0;
+    DataStructures::String string("Hello world!");
+    std::cout << string <<"\n";
+    return 0;
 }
