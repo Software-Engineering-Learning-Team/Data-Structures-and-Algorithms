@@ -14,3 +14,10 @@ TEST(StringTest, Constructor_with_empty_string) {
   std::size_t expected_length = 0;
   ASSERT_EQ(actual_length, expected_length);
 }
+
+TEST(StringTest, Constructor_with_correct_string) {
+    DataStructures::String string("Hello!");
+    auto actual_length = string.get_length();
+    std::size_t expected_length = 6;
+    ASSERT_EQ(actual_length, expected_length);
+}
