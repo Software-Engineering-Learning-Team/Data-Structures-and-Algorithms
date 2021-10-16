@@ -14,5 +14,7 @@ int main() {
   DataStructures::String new_string = string + " string";
   std::cout << string.get_capacity() << "\n";
   std::cout << new_string << " : " << new_string.get_capacity() << "\n";
+  new_string+=new_string;
+  std::cout << new_string << " : " << new_string.get_capacity() << "\n";
   return 0;
 }

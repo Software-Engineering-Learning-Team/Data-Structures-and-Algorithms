@@ -185,11 +185,19 @@ String operator+(const String &first, const char *c_string) {
 String &String::operator+=(const char *c_string) {
   std::size_t c_string_length = std::strlen(c_string);
   std::size_t new_length = string_length + c_string_length;
+  char *temp{};
+  if(c_string== this->string){
+    temp = new char[c_string_length + 1](); // for possible self operation: str+=str;
+    Algorithms::Copying::copy_data_into_array(temp, c_string_length, c_string);
+  }
+
   if (new_length + 1 > capacity) {
     reserve(static_cast<std::size_t>(1.5 * static_cast<double>(new_length)) + 1);
   }
-  Algorithms::Copying::copy_data_into_array(string + string_length, std::strlen(c_string), c_string);
+  Algorithms::Copying::copy_data_into_array(string + string_length, c_string_length,
+                                            temp== nullptr?c_string: temp);
   string_length = new_length;
+  delete[] temp;
   return *this;
 }
 
