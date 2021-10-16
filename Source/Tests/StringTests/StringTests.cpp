@@ -1,23 +1,46 @@
 #include <gtest/gtest.h>
 #include <String/String.hpp>
 
-TEST(StringTest, Constructor_with_nullptr) {
-  DataStructures::String string(nullptr);
-  auto actual_length = string.get_length();
+TEST(StringTest, ConstructorOfEmptyString) {
+  DataStructures::String string_with_nullptr(nullptr);
+  DataStructures::String string_with_no_parameters;
+  DataStructures::String string_with_empty_string("");
   std::size_t expected_length = 0;
-  ASSERT_EQ(actual_length, expected_length);
+
+  ASSERT_EQ(string_with_nullptr.get_length(), expected_length);
+  ASSERT_EQ(string_with_no_parameters.get_length(), expected_length);
+  ASSERT_EQ(string_with_empty_string.get_length(), expected_length);
+
+  ASSERT_EQ(string_with_nullptr.get_capacity(), 1);
+  ASSERT_EQ(string_with_no_parameters.get_capacity(), 1);
+  ASSERT_EQ(string_with_empty_string.get_capacity(), 1);
 }
 
-TEST(StringTest, Constructor_with_empty_string) {
-  DataStructures::String string("");
-  auto actual_length = string.get_length();
-  std::size_t expected_length = 0;
-  ASSERT_EQ(actual_length, expected_length);
+TEST(StringTest, ConstructorFromCString) {
+  DataStructures::String string("Hello, World!");
+
+  ASSERT_EQ(string.get_length(), 13);
+  ASSERT_EQ(string.get_capacity(), 14);
 }
 
-TEST(StringTest, Constructor_with_correct_string) {
-    DataStructures::String string("Hello!");
-    auto actual_length = string.get_length();
-    std::size_t expected_length = 6;
-    ASSERT_EQ(actual_length, expected_length);
+TEST(StringTest, ConstructorFromDifferentStrings) {
+  DataStructures::String string("Hello!");
+  const DataStructures::String &string_copy(string);
+
+  ASSERT_EQ(string, string_copy);
+  ASSERT_EQ(string.get_capacity(), string_copy.get_capacity());
+  ASSERT_EQ(string.get_capacity(), 7);
+}
+
+TEST(StringTest, AppendToString) {
+  DataStructures::String string("Hello!");
+  string+=" And bye!";
+
+  ASSERT_TRUE(string=="Hello! And bye!");
+  ASSERT_EQ(string.get_capacity(), 23);
+
+  string+=DataStructures::String(" :)");
+
+  ASSERT_TRUE(string=="Hello! And bye! :)");
+  ASSERT_EQ(string.get_capacity(), 23);
 }

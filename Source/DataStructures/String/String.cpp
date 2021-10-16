@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <utility>
 #include <cstring>
 #include <iostream>
 #include "String.hpp"
@@ -6,50 +6,53 @@
 
 namespace DataStructures {
 
+String::String(const String &string) :
+    String(string.string) {}
+
+String::String(String &&string) noexcept {
+  swap(*this, string);
+}
+
+String &String::operator=(const String& other) noexcept {
+  *this=String(other);
+  return *this;
+}
+
+String &String::operator=(String &&other) noexcept
+{
+  swap(*this, other);
+  return *this;
+}
+
+String::~String() noexcept{
+  delete[] string;
+}
+
+String::String() : String(nullptr) {}
+
 String::String(const char *string) {
   this->string = new char[1]();
+  this->capacity=1;
   if (string != nullptr) {
     std::size_t length = std::strlen(string);
-    reserve(2 * length + 1);
+    reserve(length + 1);
     string_length = length;
     Algorithms::Copying::copy_data_into_array(this->string, string_length + 1, string);
   }
 }
 
-String::String(const String &basicString) :
-    String(basicString.string) {}
-
-String::String() : String(nullptr) {}
-
-String::String(String &&basicString) noexcept: String(nullptr) {
-  swap(*this, basicString);
-}
-
-String::~String() {
+void String::reset() {
   delete[] string;
+  capacity = 1;
+  string_length = 0;
+  string = new char[1]();
 }
 
-std::ostream &operator<<(std::ostream &stream, const String &basicString) {
-  if (basicString.string != nullptr) {
-    stream << basicString.string;
-  }
-  return stream;
+void String::clear() {
+  Algorithms::Copying::fill_array(string, capacity, '\0');
+  string_length=0;
 }
 
-String &String::operator=(String other) noexcept {
-  swap(*this, other);
-  return *this;
-}
-
-void String::swap(String &first, String &second) noexcept {
-  std::swap(first.string, second.string);
-  std::swap(first.string_length, second.string_length);
-  std::swap(first.capacity, second.capacity);
-}
-
-const char *String::get_c_str() const {
-  return string;
-}
 void String::reserve(std::size_t n) {
   if (n > capacity) {
     char *temp = new char[n]();
@@ -59,6 +62,7 @@ void String::reserve(std::size_t n) {
     capacity = n;
   }
 }
+
 void String::shrink_to_fit() {
   if (string_length + 1 != capacity) {
     char *temp = new char[string_length + 1]();
@@ -69,21 +73,26 @@ void String::shrink_to_fit() {
   }
 }
 
+const char *String::get_c_str() const {
+  return string;
+}
+
 size_t String::get_capacity() const {
   return capacity;
 }
+
 size_t String::get_length() const {
   return string_length;
 }
-void String::reset() {
-  delete[] string;
-  capacity = 0;
-  string_length = 0;
-  string = new char[1]();
+
+char String::get_first() const {
+  return string[0];
 }
-void String::clear() {
-  Algorithms::Copying::fill_array(string, capacity, '\0');
+
+char String::get_last() const {
+  return string[string_length != 0 ? string_length - 1 : 0];
 }
+
 StringIterator String::begin() const {
   return StringIterator(string);
 }
@@ -106,10 +115,42 @@ String String::get_reversed() {
   result.reverse();
   return result;
 }
-bool operator==(const String &first, const String &second) noexcept {
-  if (first.string_length == second.string_length && first.string_length > 0) {
+
+char &String::operator[](std::size_t index) {
+  return string[index];
+}
+
+char String::operator[](std::size_t index) const {
+  return string[index];
+}
+
+char &String::at(std::size_t index) {
+  if (index >= string_length) {
+    throw std::out_of_range("String index is out of range!");
+  }
+  return string[index];
+}
+
+char String::at(std::size_t index) const {
+  if (index >= string_length) {
+    throw std::out_of_range("String index is out of range!");
+  }
+  return string[index];
+}
+
+String String::get_slice(std::size_t first_index, std::size_t last_index) const {
+  String result;
+  result.reserve(last_index - first_index + 2);
+  Algorithms::Copying::copy_data_into_array(result.string,
+                                            last_index - first_index + 1,
+                                            string + first_index);
+  return result;
+}
+
+bool operator==(const String &first, const char *other_c_string) noexcept {
+  if (first.string_length == std::strlen(other_c_string)) {
     for (std::size_t i = 0; i < first.string_length; i++) {
-      if (first.string[i] != second.string[i]) {
+      if (first.string[i] != other_c_string[i]) {
         return false;
       }
     }
@@ -117,60 +158,63 @@ bool operator==(const String &first, const String &second) noexcept {
   }
   return false;
 }
+
+bool operator!=(const String &first, const char *other_c_string) noexcept {
+  return !(first==other_c_string);
+}
+
+bool operator==(const String &first, const String &second) noexcept {
+  return first==second.string;
+}
+
 bool operator!=(const String &first, const String &second) noexcept {
   return !(first == second);
 }
-String operator+(const String &first, const String &second) {
+
+String operator+(const String &first, const char *c_string) {
   String result;
-  std::size_t sum_length = first.string_length + second.string_length;
-  result.reserve(2 * sum_length + 1);
+  std::size_t c_string_length=std::strlen(c_string);
+  std::size_t sum_length = first.string_length + c_string_length;
+  result.reserve(sum_length + 1);
   Algorithms::Copying::copy_data_into_array(result.string, first.string_length, first.string);
-  Algorithms::Copying::copy_data_into_array(result.string + first.string_length, second.string_length, second.string);
+  Algorithms::Copying::copy_data_into_array(result.string + first.string_length,
+                                            c_string_length, c_string);
   result.string_length = sum_length;
   return result;
 }
-String &String::operator+=(const String &other) {
-  *this = *this + other;
-  return *this;
-}
-String operator+(const String &first, const char *c_string) {
-  const String &result(first);
-  return result + String(c_string);
-}
-String &String::operator+=(const char *c_string) {
-  *this = *this + c_string;
-  return *this;
-}
-char &String::operator[](std::size_t index) {
-  return string[index];
-}
-char String::operator[](std::size_t index) const {
-  return string[index];
-}
-char String::get_first() const {
 
-  return string[0];
-}
-char String::get_last() const {
-  return string[string_length != 0 ? string_length - 1 : 0];
-}
-char &String::at(std::size_t index) {
-  if (index >= string_length) {
-    throw std::out_of_range("String index is out of range!");
+String &String::operator+=(const char *c_string) {
+  std::size_t c_string_length=std::strlen(c_string);
+  std::size_t new_length=string_length+c_string_length;
+  if(new_length+1 > capacity)
+  {
+    reserve(static_cast<std::size_t>(1.5*static_cast<double>(new_length))+1);
   }
-  return string[index];
+  Algorithms::Copying::copy_data_into_array(string+string_length, std::strlen(c_string), c_string);
+  string_length=new_length;
+  return *this;
 }
-char String::at(std::size_t index) const {
-  if (index >= string_length) {
-    throw std::out_of_range("String index is out of range!");
+
+String operator+(const String &first, const String &second) {
+  return first+second.string;
+}
+
+String &String::operator+=(const String &other) {
+  *this+=other.string;
+  return *this;
+}
+
+std::ostream &operator<<(std::ostream &stream, const String &basicString) {
+  if (basicString.string != nullptr) {
+    stream << basicString.string;
   }
-  return string[index];
+  return stream;
 }
-String String::get_slice(std::size_t first_index, std::size_t last_index) const {
-  String result;
-  result.reserve(last_index - first_index + 2);
-  Algorithms::Copying::copy_data_into_array(result.string, last_index - first_index + 1, string + first_index);
-  return result;
+
+void String::swap(String &first, String &second) noexcept {
+  std::swap(first.string, second.string);
+  std::swap(first.string_length, second.string_length);
+  std::swap(first.capacity, second.capacity);
 }
 
 }
