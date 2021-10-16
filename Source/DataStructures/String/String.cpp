@@ -13,18 +13,17 @@ String::String(String &&string) noexcept {
   swap(*this, string);
 }
 
-String &String::operator=(const String& other) noexcept {
-  *this=String(other);
+String &String::operator=(const String &other) noexcept {
+  *this = String(other);
   return *this;
 }
 
-String &String::operator=(String &&other) noexcept
-{
+String &String::operator=(String &&other) noexcept {
   swap(*this, other);
   return *this;
 }
 
-String::~String() noexcept{
+String::~String() noexcept {
   delete[] string;
 }
 
@@ -32,7 +31,7 @@ String::String() : String(nullptr) {}
 
 String::String(const char *string) {
   this->string = new char[1]();
-  this->capacity=1;
+  this->capacity = 1;
   if (string != nullptr) {
     std::size_t length = std::strlen(string);
     reserve(length + 1);
@@ -50,7 +49,7 @@ void String::reset() {
 
 void String::clear() {
   Algorithms::Copying::fill_array(string, capacity, '\0');
-  string_length=0;
+  string_length = 0;
 }
 
 void String::reserve(std::size_t n) {
@@ -160,11 +159,11 @@ bool operator==(const String &first, const char *other_c_string) noexcept {
 }
 
 bool operator!=(const String &first, const char *other_c_string) noexcept {
-  return !(first==other_c_string);
+  return !(first == other_c_string);
 }
 
 bool operator==(const String &first, const String &second) noexcept {
-  return first==second.string;
+  return first == second.string;
 }
 
 bool operator!=(const String &first, const String &second) noexcept {
@@ -173,7 +172,7 @@ bool operator!=(const String &first, const String &second) noexcept {
 
 String operator+(const String &first, const char *c_string) {
   String result;
-  std::size_t c_string_length=std::strlen(c_string);
+  std::size_t c_string_length = std::strlen(c_string);
   std::size_t sum_length = first.string_length + c_string_length;
   result.reserve(sum_length + 1);
   Algorithms::Copying::copy_data_into_array(result.string, first.string_length, first.string);
@@ -184,23 +183,22 @@ String operator+(const String &first, const char *c_string) {
 }
 
 String &String::operator+=(const char *c_string) {
-  std::size_t c_string_length=std::strlen(c_string);
-  std::size_t new_length=string_length+c_string_length;
-  if(new_length+1 > capacity)
-  {
-    reserve(static_cast<std::size_t>(1.5*static_cast<double>(new_length))+1);
+  std::size_t c_string_length = std::strlen(c_string);
+  std::size_t new_length = string_length + c_string_length;
+  if (new_length + 1 > capacity) {
+    reserve(static_cast<std::size_t>(1.5 * static_cast<double>(new_length)) + 1);
   }
-  Algorithms::Copying::copy_data_into_array(string+string_length, std::strlen(c_string), c_string);
-  string_length=new_length;
+  Algorithms::Copying::copy_data_into_array(string + string_length, std::strlen(c_string), c_string);
+  string_length = new_length;
   return *this;
 }
 
 String operator+(const String &first, const String &second) {
-  return first+second.string;
+  return first + second.string;
 }
 
 String &String::operator+=(const String &other) {
-  *this+=other.string;
+  *this += other.string;
   return *this;
 }
 

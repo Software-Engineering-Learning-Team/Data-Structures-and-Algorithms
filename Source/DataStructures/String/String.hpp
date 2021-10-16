@@ -10,8 +10,8 @@ struct String {
 
   String(const String &string);
   String(String &&string) noexcept;
-  String &operator=(const String& other) noexcept;
-  String &operator=(String&& other) noexcept;
+  String &operator=(const String &other) noexcept;
+  String &operator=(String &&other) noexcept;
   virtual ~String() noexcept;
   String();
   explicit String(const char *string);
@@ -37,8 +37,8 @@ struct String {
   [[nodiscard]] char at(std::size_t index) const;
 
   [[nodiscard]] String get_slice(std::size_t first_index, std::size_t last_index) const;
-  friend bool operator==(const String &first, const char* other_c_string) noexcept;
-  friend bool operator!=(const String &first, const char* other_c_string) noexcept;
+  friend bool operator==(const String &first, const char *other_c_string) noexcept;
+  friend bool operator!=(const String &first, const char *other_c_string) noexcept;
   friend bool operator==(const String &first, const String &second) noexcept;
   friend bool operator!=(const String &first, const String &second) noexcept;
 

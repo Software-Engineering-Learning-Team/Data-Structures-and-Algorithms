@@ -34,13 +34,13 @@ TEST(StringTest, ConstructorFromDifferentStrings) {
 
 TEST(StringTest, AppendToString) {
   DataStructures::String string("Hello!");
-  string+=" And bye!";
+  string += " And bye!";
 
-  ASSERT_TRUE(string=="Hello! And bye!");
+  ASSERT_TRUE(string == "Hello! And bye!");
   ASSERT_EQ(string.get_capacity(), 23);
 
-  string+=DataStructures::String(" :)");
+  string += DataStructures::String(" :)");
 
-  ASSERT_TRUE(string=="Hello! And bye! :)");
+  ASSERT_TRUE(string == "Hello! And bye! :)");
   ASSERT_EQ(string.get_capacity(), 23);
 }
