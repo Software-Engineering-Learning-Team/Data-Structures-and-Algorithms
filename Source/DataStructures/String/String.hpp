@@ -6,19 +6,45 @@
 #include "StringIterator.hpp"
 namespace DataStructures {
 
+/// String class.
 struct String {
 
+  /// Copy constructor.
   String(const String &string);
+
+  /// Move constructor.
   String(String &&string) noexcept;
+
+  /// Copy assignment operator.
   String &operator=(const String &other) noexcept;
+
+  /// Move assignment operator.
   String &operator=(String &&other) noexcept;
+
+  /// Virtual destructor.
   virtual ~String() noexcept;
+
+  /// Default constructs. Initializes empty string.
   String();
+
+  /// Constructor from C string.
+  /// \param string String for constructing from.
   explicit String(const char *string);
 
+  /// Resets the string completely.
+  /// After this sting will be really empty with capacity of 1 and length 0.
   void reset();
+
+  /// Clears the string. Capacity remains unchanged, but length will be 0.
   void clear();
-  void reverse();
+
+  ///  Reserves memory (dynamic) for n string symbols.
+  /// \param n Number of string symbols to reserve memory for.
+  /// \remark If n &le capacity then nothing happens.
+  /// Otherwise new memory is allocated and raw_string is being copied to new location.
+  void reserve(std::size_t n);
+
+  /// Reduces capacity to length + 1.
   void shrink_to_fit();
 
   [[nodiscard]] const char *get_c_str() const;
@@ -28,7 +54,8 @@ struct String {
   [[nodiscard]] char get_last() const;
   [[nodiscard]] StringIterator begin() const;
   [[nodiscard]] StringIterator end() const;
-  void reserve(std::size_t n);
+
+  void reverse();
   String get_reversed();
 
   [[nodiscard]] char operator[](std::size_t index) const;
@@ -51,7 +78,7 @@ struct String {
   friend std::ostream &operator<<(std::ostream &stream, const String &basicString);
 
  private:
-  char *string{};
+  char *raw_string{};
   std::size_t string_length{};
   std::size_t capacity{};
   static void swap(String &first, String &second) noexcept;
