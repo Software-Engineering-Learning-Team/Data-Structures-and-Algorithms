@@ -10,7 +10,7 @@ struct StringIterator {
   }
   bool operator!=(const StringIterator &other) const { return pointer != other.pointer; }
   char operator*() const { return *pointer; }
-  char& operator*() { return *pointer; }
+  char &operator*() { return *pointer; }
  private:
   char *pointer;
 };

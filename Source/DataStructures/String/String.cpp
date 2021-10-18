@@ -13,7 +13,7 @@ String::String(String &&string) noexcept {
   swap(*this, string);
 }
 
-String &String::operator=(const String &other) noexcept {
+String &String::operator=(const String &other) {
   *this = String(other);
   return *this;
 }

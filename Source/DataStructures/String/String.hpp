@@ -16,7 +16,7 @@ struct String {
   String(String &&string) noexcept;
 
   /// Copy assignment operator.
-  String &operator=(const String &other) noexcept;
+  String &operator=(const String &other);
 
   /// Move assignment operator.
   String &operator=(String &&other) noexcept;
