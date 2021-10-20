@@ -94,7 +94,7 @@ namespace DataStructures
 		friend std::ostream& operator<<(std::ostream& stream, const String& basicString);
 
 	private:
-		char* raw_string{};
+		char* raw_string{ nullptr };
 		std::size_t string_length{};
 		std::size_t capacity{};
 

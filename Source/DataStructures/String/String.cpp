@@ -114,9 +114,9 @@ namespace DataStructures
 
 	void String::reverse()
 	{
-		for (std::size_t i = 0; i < string_length/2; i++)
+		for (std::size_t i = 0; i < string_length / 2; i++)
 		{
-			std::swap(raw_string[string_length-i-1],raw_string[i]);
+			std::swap(raw_string[string_length - i - 1], raw_string[i]);
 		}
 	}
 
@@ -162,6 +162,7 @@ namespace DataStructures
 		Algorithms::Copying::copy_data_into_array(result.raw_string,
 				last_index - first_index + 1,
 				raw_string + first_index);
+		result.string_length = last_index - first_index + 1;
 		return result;
 	}
 
