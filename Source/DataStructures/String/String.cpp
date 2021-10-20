@@ -62,16 +62,6 @@ void String::reserve(std::size_t n) {
   }
 }
 
-void String::shrink_to_fit() {
-  if (string_length + 1 != capacity) {
-    char *temp = new char[string_length + 1]();
-    Algorithms::Copying::copy_data_into_array(temp, string_length, raw_string);
-    delete[] raw_string;
-    raw_string = temp;
-    capacity = string_length + 1;
-  }
-}
-
 const char *String::get_c_str() const {
   return raw_string;
 }

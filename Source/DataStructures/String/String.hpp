@@ -44,9 +44,6 @@ struct String {
   /// Otherwise new memory is allocated and raw_string is being copied to new location.
   void reserve(std::size_t n);
 
-  /// Reduces capacity to length + 1.
-  void shrink_to_fit();
-
   [[nodiscard]] const char *get_c_str() const;
   [[nodiscard]] size_t get_capacity() const;
   [[nodiscard]] size_t get_length() const;
