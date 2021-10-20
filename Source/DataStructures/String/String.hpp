@@ -63,7 +63,7 @@ namespace DataStructures
 
 		void reverse();
 
-		String get_reversed();
+		[[nodiscard]] String get_reversed() const;
 
 		[[nodiscard]] char operator[](std::size_t index) const;
 

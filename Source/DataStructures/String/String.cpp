@@ -114,16 +114,13 @@ namespace DataStructures
 
 	void String::reverse()
 	{
-		char* temp = new char[string_length + 1]();
-		for (std::size_t i = 0; i < string_length; i++)
+		for (std::size_t i = 0; i < string_length/2; i++)
 		{
-			temp[i] = raw_string[string_length - 1 - i];
+			std::swap(raw_string[string_length-i-1],raw_string[i]);
 		}
-		delete[] raw_string;
-		raw_string = temp;
 	}
 
-	String String::get_reversed()
+	String String::get_reversed() const
 	{
 		String result(*this);
 		result.reverse();

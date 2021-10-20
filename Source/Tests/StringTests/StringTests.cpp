@@ -42,9 +42,29 @@ TEST(StringTest, AppendToString)
 
 	ASSERT_TRUE(string == "Hello! And bye!");
 	ASSERT_EQ(string.get_capacity(), 23);
+	ASSERT_EQ(string.get_length(), 15);
 
 	string += DataStructures::String(" :)");
 
 	ASSERT_TRUE(string == "Hello! And bye! :)");
 	ASSERT_EQ(string.get_capacity(), 23);
+	ASSERT_EQ(string.get_length(), 18);
+}
+
+TEST(StringTest, ReverseFunctions)
+{
+	DataStructures::String string("Hello, World!");
+
+	ASSERT_EQ(string.get_reversed(), "!dlroW ,olleH");
+	ASSERT_EQ(string, "Hello, World!");
+
+	string+="!";
+
+	ASSERT_EQ(string.get_reversed(), "!!dlroW ,olleH");
+	ASSERT_EQ(string, "Hello, World!!");
+
+	string.reverse();
+
+	ASSERT_EQ(string, "!!dlroW ,olleH");
+	ASSERT_EQ(string.get_reversed(), "Hello, World!!");
 }
