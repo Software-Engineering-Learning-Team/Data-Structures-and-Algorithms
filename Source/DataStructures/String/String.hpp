@@ -5,6 +5,7 @@
 #include <ostream>
 #include "StringIterator.hpp"
 
+/// Contains data structures.
 namespace DataStructures
 {
 

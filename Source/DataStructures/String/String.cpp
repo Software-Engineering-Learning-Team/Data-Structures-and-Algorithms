@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include "String.hpp"
-#include "../../Algorithms/Copying/Copying.tpp"
+#include <Copying/Copying.tpp>
 
 namespace DataStructures
 {
