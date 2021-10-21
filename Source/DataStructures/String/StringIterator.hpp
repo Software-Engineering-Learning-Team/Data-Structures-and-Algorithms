@@ -3,34 +3,42 @@
 
 namespace DataStructures
 {
+	/// Iterator for DataStructures::String objects.
 	struct StringIterator
 	{
+		/// Iterator constructor.
+		/// \param ptr C string for iterating through.
 		explicit StringIterator(char* ptr) : pointer(ptr)
 		{
 		}
 
+		/// Moves iterator right.
 		StringIterator& operator++()
 		{
 			++pointer;
 			return *this;
 		}
 
-		bool operator!=(const StringIterator& other) const
+		/// Checks whether current iterator is not equal to another one.
+		bool operator!=(const StringIterator& another) const
 		{
-			return pointer != other.pointer;
+			return pointer != another.pointer;
 		}
 
+		/// Returns a char at a current position.
 		char operator*() const
 		{
 			return *pointer;
 		}
 
+		/// Returns a reference to char at a current position.
 		char& operator*()
 		{
 			return *pointer;
 		}
 
 	private:
+		/// C string for iterating through.
 		char* pointer;
 	};
 }

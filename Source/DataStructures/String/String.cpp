@@ -166,13 +166,13 @@ namespace DataStructures
 		return result;
 	}
 
-	bool operator==(const String& first, const char* other_c_string) noexcept
+	bool operator==(const String& first, const char* another_c_string) noexcept
 	{
-		if (first.string_length == std::strlen(other_c_string))
+		if (first.string_length == std::strlen(another_c_string))
 		{
 			for (std::size_t i = 0; i < first.string_length; i++)
 			{
-				if (first.raw_string[i] != other_c_string[i])
+				if (first.raw_string[i] != another_c_string[i])
 				{
 					return false;
 				}
@@ -182,9 +182,9 @@ namespace DataStructures
 		return false;
 	}
 
-	bool operator!=(const String& first, const char* other_c_string) noexcept
+	bool operator!=(const String& first, const char* another_c_string) noexcept
 	{
-		return !(first == other_c_string);
+		return !(first == another_c_string);
 	}
 
 	bool operator==(const String& first, const String& second) noexcept
