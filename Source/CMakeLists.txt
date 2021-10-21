@@ -25,6 +25,8 @@ set(SOURCES
 
 add_executable(DataStructuresAndAlgorithms main.cpp ${SOURCES})
 add_library(DataStructuresAndAlgorithms_lib ${SOURCES})
+add_subdirectory(Examples)
 add_subdirectory(Tests)
+
 
 

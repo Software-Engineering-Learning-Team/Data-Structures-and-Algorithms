@@ -10,6 +10,7 @@ namespace DataStructures
 {
 
 /// String class.
+/// \example String/BasicStringExamples.hpp
 	struct String
 	{
 

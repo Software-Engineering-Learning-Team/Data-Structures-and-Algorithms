@@ -1,0 +1,6 @@
+project(Examples)
+
+include_directories(${DataStructuresAndAlgorithms_SOURCE_DIR}/DataStructures ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
+
+add_executable(Examples main.cpp String/BasicStringExamples.hpp)
+target_link_libraries(Examples DataStructuresAndAlgorithms_lib)
