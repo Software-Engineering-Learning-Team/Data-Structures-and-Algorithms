@@ -936,7 +936,8 @@ EXCLUDE_PATTERNS       = *.UnitTests \
                          *cmake-build* \
                          *Tests \
                          *TestingHelper \
-                         *Examples
+                         *Examples \
+                         *Benchmarks*
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
