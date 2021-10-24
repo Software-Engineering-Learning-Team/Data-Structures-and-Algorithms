@@ -14,7 +14,8 @@ if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
 endif ()
 
-include_directories(${DataStructuresAndAlgorithms_SOURCE_DIR}/DataStructures ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
+include_directories(${DataStructuresAndAlgorithms_SOURCE_DIR}/DataStructures
+                    ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
 
 set(SOURCES
         DataStructures/String/String.hpp
