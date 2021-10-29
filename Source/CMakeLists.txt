@@ -4,6 +4,7 @@ project(DataStructuresAndAlgorithms)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -24,7 +25,6 @@ set(SOURCES
 
         Algorithms/Copying/Copying.tpp)
 
-add_executable(DataStructuresAndAlgorithms main.cpp ${SOURCES})
 add_library(DataStructuresAndAlgorithms_lib ${SOURCES})
 add_subdirectory(Examples)
 add_subdirectory(Tests)
