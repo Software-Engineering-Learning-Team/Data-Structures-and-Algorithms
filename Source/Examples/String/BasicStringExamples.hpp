@@ -9,7 +9,6 @@ void ProcessBasicStringExamples()
 	std::cout << "Length is \t" << string.get_length() << "\n";
 	std::cout << "Capacity is \t" << string.get_capacity() << "\n";
 
-
 }
 
 #endif //DATASTRUCTURESANDALGORITHMS_BASICSTRINGEXAMPLES_HPP

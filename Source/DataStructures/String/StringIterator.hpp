@@ -37,7 +37,7 @@ namespace DataStructures
 			return *pointer;
 		}
 
-	private:
+	 private:
 		/// \brief C string for iterating through.
 		char* pointer;
 	};

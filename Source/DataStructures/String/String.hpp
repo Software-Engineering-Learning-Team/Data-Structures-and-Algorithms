@@ -48,6 +48,9 @@ namespace DataStructures
 		/// Otherwise new memory is allocated and raw_string is being copied to new location.
 		void reserve(std::size_t n);
 
+		/// Reduces capacity to string length + 1.
+		void shrink_to_fit();
+
 		/// \brief Returns C string, represented by current string object.
 		[[nodiscard]] const char* get_c_str() const;
 
@@ -125,7 +128,7 @@ namespace DataStructures
 		/// \brief Outputs current string to stream.
 		friend std::ostream& operator<<(std::ostream& stream, const String& basicString);
 
-	private:
+	 private:
 		/// \brief C string for representing String content.
 		char* raw_string{ nullptr };
 

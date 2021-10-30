@@ -16,7 +16,7 @@ if (MSVC)
 endif ()
 
 include_directories(${DataStructuresAndAlgorithms_SOURCE_DIR}/DataStructures
-                    ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
+        ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
 
 set(SOURCES
         DataStructures/String/String.hpp

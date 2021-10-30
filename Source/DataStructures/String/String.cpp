@@ -8,7 +8,7 @@ namespace DataStructures
 {
 
 	String::String(const String& string) :
-			String(string.raw_string)
+		String(string.raw_string)
 	{
 	}
 
@@ -32,6 +32,7 @@ namespace DataStructures
 	String::~String() noexcept
 	{
 		delete[] raw_string;
+		raw_string = nullptr;
 	}
 
 	String::String() : String(nullptr)
@@ -74,6 +75,18 @@ namespace DataStructures
 			delete[] raw_string;
 			raw_string = temp;
 			capacity = n;
+		}
+	}
+
+	void String::shrink_to_fit()
+	{
+		if (string_length + 1 != capacity)
+		{
+			char* temp = new char[string_length + 1]();
+			Algorithms::Copying::copy_data_into_array(temp, string_length, raw_string);
+			delete[] raw_string;
+			raw_string = temp;
+			capacity = string_length + 1;
 		}
 	}
 
@@ -160,8 +173,8 @@ namespace DataStructures
 		String result;
 		result.reserve(last_index - first_index + 2);
 		Algorithms::Copying::copy_data_into_array(result.raw_string,
-				last_index - first_index + 1,
-				raw_string + first_index);
+			last_index - first_index + 1,
+			raw_string + first_index);
 		result.string_length = last_index - first_index + 1;
 		return result;
 	}
@@ -205,7 +218,7 @@ namespace DataStructures
 		result.reserve(sum_length + 1);
 		Algorithms::Copying::copy_data_into_array(result.raw_string, first.string_length, first.raw_string);
 		Algorithms::Copying::copy_data_into_array(result.raw_string + first.string_length,
-				c_string_length, c_string);
+			c_string_length, c_string);
 		result.string_length = sum_length;
 		return result;
 	}
@@ -226,7 +239,7 @@ namespace DataStructures
 			reserve(static_cast<std::size_t>(1.5 * static_cast<double>(new_length)) + 1);
 		}
 		Algorithms::Copying::copy_data_into_array(raw_string + string_length, c_string_length,
-				temp == nullptr ? c_string : temp);
+			temp == nullptr ? c_string : temp);
 		string_length = new_length;
 		delete[] temp;
 		return *this;

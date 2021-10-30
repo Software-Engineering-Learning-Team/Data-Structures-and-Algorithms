@@ -12,7 +12,6 @@ static void BM_StdStringCreation(benchmark::State& state)
 
 BENCHMARK(BM_StdStringCreation);
 
-
 static void BM_CustomStringCreation(benchmark::State& state)
 {
 	for (auto _: state)

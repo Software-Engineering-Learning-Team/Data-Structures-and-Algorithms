@@ -13,7 +13,7 @@ FetchContent_MakeAvailable(gb)
 
 include_directories(${benchmark_SOURCE_DIR}/include ${benchmark_SOURCE_DIR})
 include_directories(${DataStructuresAndAlgorithms_SOURCE_DIR}/DataStructures
-                    ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
+        ${DataStructuresAndAlgorithms_SOURCE_DIR}/Algorithms)
 
 add_executable(Google_benchmarks_run
         Benchmarks/StringBenchmarks.cpp)

@@ -52,6 +52,10 @@ TEST(StringTest, AppendToString)
 
 	string += string;
 	ASSERT_EQ(string, "Hello! And bye! :)Hello! And bye! :)");
+
+	ASSERT_NE(string.get_capacity(), string.get_length() + 1);
+	string.shrink_to_fit();
+	ASSERT_EQ(string.get_capacity(), string.get_length() + 1);
 }
 
 TEST(StringTest, ReverseFunctions)
