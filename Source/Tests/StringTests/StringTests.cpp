@@ -201,7 +201,18 @@ TEST(StringTest, StringToOstream)
 	std::ostringstream stream;
 	stream << string;
 
-	DataStructures::String string2 = std::move(string);
-
 	ASSERT_TRUE(stream.str() == "String for output");
+}
+
+TEST(StringTest, ReadStringFromStream)
+{
+	DataStructures::String string;
+	std::istringstream stream("Hello from input stream\n");
+	stream >> string;
+	ASSERT_TRUE(string == "Hello from input stream");
+
+	stream.setstate(std::ios::failbit);
+	string.clear();
+	stream >> string;
+	ASSERT_TRUE(string == "");
 }

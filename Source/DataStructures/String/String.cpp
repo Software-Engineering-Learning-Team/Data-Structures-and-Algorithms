@@ -272,5 +272,32 @@ namespace DataStructures
 		std::swap(first.capacity, second.capacity);
 	}
 
+	std::istream& operator>>(std::istream& stream, String& result)
+	{
+		std::istream::sentry sentry(stream);
+		if (!sentry)
+		{
+			return stream;
+		}
+
+		std::size_t current_position = 0;
+		result.string_length = 0;
+		int next_symbol = 0;
+		result.reserve(10);
+
+		while ((next_symbol = stream.get(), !stream.eof()) && next_symbol != '\n' && next_symbol != '\r')
+		{
+			if (current_position == result.capacity - 1)
+			{
+				result.reserve(2 * result.capacity);
+			}
+			result[current_position++] = static_cast<char>(next_symbol);
+			result.string_length++;
+		}
+		
+		result.shrink_to_fit();
+		return stream;
+	}
+
 }
 

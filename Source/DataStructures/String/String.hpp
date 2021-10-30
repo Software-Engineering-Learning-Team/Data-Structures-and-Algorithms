@@ -128,6 +128,8 @@ namespace DataStructures
 		/// \brief Outputs current string to stream.
 		friend std::ostream& operator<<(std::ostream& stream, const String& basicString);
 
+		friend std::istream& operator>>(std::istream& stream, String& out);
+
 	 private:
 		/// \brief C string for representing String content.
 		char* raw_string{ nullptr };
